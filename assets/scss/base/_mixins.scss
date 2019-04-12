@@ -1,0 +1,20 @@
+/** Placeholder */
+@mixin placeholder {
+  &.placeholder { @content; }
+  &:-moz-placeholder { @content; }
+  &::-moz-placeholder { @content; }
+  &:-ms-input-placeholder { @content; }
+  &::-webkit-input-placeholder { @content; }
+}
+
+/** Font face */
+@mixin font-face($name, $style, $weight, $path) {
+  @font-face {
+    font-family: $name;
+    font-style: $style;
+    font-weight: $weight;
+    src: url('#{$path}.woff2') format('woff2'),
+      url('#{$path}.woff') format('woff'),
+      url('#{$path}.ttf') format('truetype');
+  }
+}

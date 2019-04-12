@@ -1,0 +1,29 @@
+{
+	"name": "jetpack",
+	"version": "1.0.0",
+	"author": "Kamil Rybinski",
+	"scripts": {
+		"dev": "webpack --mode development",
+		"watch": "webpack --mode development --watch",
+		"prod": "webpack --mode production",
+		"build": "npm run prod"
+	},
+	"dependencies": {},
+	"devDependencies": {
+		"autoprefixer": "9.1.2",
+		"babel-core": "6.26.3",
+		"babel-loader": "7.1.5",
+		"babel-preset-env": "1.7.0",
+		"css-flip": "0.5.0",
+		"css-loader": "1.0.0",
+		"extract-loader": "2.0.1",
+		"extract-text-webpack-plugin": "3.0.2",
+		"file-loader": "1.1.11",
+		"node-sass": "4.9.3",
+		"postcss-cli": "6.0.0",
+		"postcss-loader": "3.0.0",
+		"sass-loader": "7.1.0",
+		"webpack": "4.17.0",
+		"webpack-cli": "3.1.0"
+	}
+}

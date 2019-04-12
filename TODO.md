@@ -1,0 +1,19 @@
+#TODO List
+
+- Add UserService
+- Forget password
+- Reset password
+- Change password
+- Add/edit/update/delete use
+- User profile
+- User profile photo update
+- Versioning assets built by webpack
+- Twig templating
+- Asset method for generating asset address in templates
+- Admin dashboard
+- Translations
+- Method for generating url address in templates
+- Favicon
+- Routing improvement
+- Active nav link function
+- Routes method with parameters
