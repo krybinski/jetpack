@@ -6,7 +6,7 @@ Simple and modern MVC framework.
 - composer
 
 ## Deploy
-- `set up config.php`
+- `copy .env.example to .env and set up`
 - `composer install`
 - `npm install`
 - `php bin/install.php`

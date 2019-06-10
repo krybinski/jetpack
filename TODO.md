@@ -1,5 +1,7 @@
 #TODO List
 
+- Remove constants
+- Add canonical to seo trait
 - Add UserService
 - Forget password
 - Reset password

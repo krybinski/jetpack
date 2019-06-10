@@ -5,7 +5,7 @@
 	<div class="header--carousel__wrapper">
 		<div class="container-fluid header--content__wrapper">
 			<div class="header--content">
-				<h1 class="header--title"><?= SITE_NAME ?></h1>
+				<h1 class="header--title"><?= config('app.name') ?></h1>
 			</div>
 		</div>
 	</div>

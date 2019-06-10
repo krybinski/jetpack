@@ -1,14 +1,12 @@
 <?php
 
-require './config/config.php';
-
 $options = [
     PDO::ATTR_PERSISTENT => true,
     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
 ];
 
 try {
-	$connection = new PDO('mysql:host=' . DB_HOST, DB_USER, DB_PASS, $options);
+	$connection = new PDO('mysql:host=' . config('database.host'), config('database.user'), config('database.user'), $options);
 	$sql = file_get_contents('./data/init.sql');
 	$connection->exec($sql);
 

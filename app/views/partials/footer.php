@@ -16,6 +16,6 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
 	<script src="<?= $this->getScript('scripts'); ?>"></script>
-    <script src="/build/js/main.js?v=<?= APP_VERSION ?>"></script>
+    <script src="/build/js/main.js?v=<?= config('app.version') ?>"></script>
 </body>
 </html>

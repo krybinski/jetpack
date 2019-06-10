@@ -2,10 +2,9 @@
 .vscode
 .vagrant
 .DS_Store
-config/config.php
 node_modules
 public/build
 npm-debug.log
 yarn-error.log
 vendor
-.env.json
+.env

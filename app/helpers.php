@@ -1,6 +1,17 @@
 <?php
 
 /**
+ * Get variable from configs
+ */
+function config(string $path)
+{
+	$filename = explode('.', $path)[0];
+	$variable = explode('.', $path)[1];
+	$load = include('../config/' . $filename . '.php');
+	return $load[$variable];
+}
+
+/**
  * Get filtered $_POST values.
  * @return array
  */

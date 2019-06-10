@@ -6,10 +6,11 @@ use \PDO;
 
 class Database
 {
-    private $host = DB_HOST;
-    private $user = DB_USER;
-    private $pass = DB_PASS;
-    private $dbname = DB_NAME;
+    private $host = null;
+    private $port = null;
+    private $user = null;
+    private $pass = null;
+    private $dbname = null;
 
     private $connection;
     private $error;
@@ -23,8 +24,15 @@ class Database
      */
     public function __construct()
     {
+		$this->host = config('database.host');
+		$this->port = config('database.port');
+		$this->user = config('database.user');
+		$this->pass = config('database.pass');
+		$this->dbname = config('database.name');
+
         ini_set('mysql.connect_timeout', 300);
-        ini_set('default_socket_timeout', 300);
+		ini_set('default_socket_timeout', 300);
+
         $this->connect();
 	}
 
@@ -33,7 +41,7 @@ class Database
 	 */
 	public function connect()
 	{
-		$dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbname;
+		$dsn = 'mysql:host=' . $this->host . ';port=' . $this->port . ';dbname=' . $this->dbname;
         $options = [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
         ];

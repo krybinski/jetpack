@@ -2,20 +2,25 @@
 
 namespace Jetpack\Controllers;
 
+use Jetpack\Traits\SeoTrait;
+
 class IndexController extends Controller
 {
-	public $pageTitle = 'Jetpack - ' . SITE_NAME;
-	public $seoTags = [
-		'description' => 'Opis',
-		'canonical' => APP_URL,
-	];
+	use SeoTrait;
+
     public $user;
     public $comments;
     public $isLoggedIn;
-    public $csrf;
+	public $csrf;
 
     public function get()
     {
+		$this->pageTitle('Home page');
+		$this->pageDescription('Home page description');
+		$this->seoTags = [
+			'canonical' => config('app.url'),
+		];
+
         $this->isLoggedIn = $this->sessionService->isUserLoggedIn();
 
         $userId = $this->sessionService->getSessionValue('user_id');

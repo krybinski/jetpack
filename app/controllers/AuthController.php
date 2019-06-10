@@ -2,6 +2,7 @@
 
 namespace Jetpack\Controllers;
 
+use Jetpack\Services\ImageService;
 use Jetpack\Services\SessionService;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -11,10 +12,12 @@ class AuthController extends Controller
     public $list;
     public $user;
 	public $csrf;
+	private $imageService;
 
 	public function __construct()
 	{
 		parent::__construct();
+		$this->imageService = new ImageService;
 	}
 
 	public function get()

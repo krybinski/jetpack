@@ -50,7 +50,7 @@ abstract class Controller
     protected function getScript($filename)
     {
         $file = strtolower($filename);
-        return APP_URL . '/js/' . $file . '.js';
+        return config('app.url') . '/js/' . $file . '.js';
     }
 
     /**
@@ -61,7 +61,7 @@ abstract class Controller
     protected function getStylesheet($filename)
     {
         $file = strtolower($filename);
-        return APP_URL . '/build/css/' . $file . '.css';
+        return config('app.url') . '/build/css/' . $file . '.css';
 	}
 
     /**
