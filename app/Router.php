@@ -1,91 +1,99 @@
 <?php
 
-use Jetpack\User;
+use Aura\Router\RouterContainer;
 
 class Router
 {
-    /**
-     * All registered routes.
-     */
-    public $routes = [
-        'GET' => [],
-        'POST' => []
-    ];
-
-    /**
-     * Load a user's routes file.
-     */
     public static function load($file)
     {
-        $router = new static;
+		$routeContainer = new RouterContainer();
+		$map = $routeContainer->getMap();
 
-        require $file;
-        return $router;
-    }
+		require $file;
 
-    /**
-     * Register a GET route.
-     */
-    public function get($uri, $controller)
-    {
-        $this->routes['GET'][$uri] = $controller;
-    }
+		// $map->get('blog.read', '/blog/{ide}')
+		//     ->handler('\Http\controller\BlogController@show');
 
-    /**
-     * Register a POST route.
-     */
-    public function post($uri, $controller)
-    {
-        $this->routes['POST'][$uri] = $controller;
-    }
+		// $map->get(null, "/")
+		//     ->handler('\Http\controller\BlogController');
 
-    /**
-     * Load the requested URI's associated controller method.
-     */
-    public function direct($uri, $requestType)
-    {
-        $userControl = new User;
-        $username = $userControl->getUserByUsername($uri);
+		// $map->get('dev', '/dev');
 
-        // If uri contains edit, go to edit controller
-        if (($pos = strpos($uri, '/')) !== false) {
-            if (strpos($uri, 'edit') !== false) {
-                $param = substr($uri, $pos+1);
-                $uri = 'edit';
-            }
-        }
-        // Gather all users from the database and compare against uri
-        else if ($username) {
-            $uri = 'user';
-        }
+		// $map->get(null,'/error')
+		//     ->handler('\Http\controller\ErrorController'); //`indexAction` would be the invoked method
 
-        if (array_key_exists($uri, $this->routes[$requestType])) {
-            return $this->callAction(
-                ...explode('@', 'Jetpack\Controllers\\' . $this->routes[$requestType][$uri])
-            );
-        } else {
-            return $this->callAction(
-                ...explode('@', 'Jetpack\Controllers\\' . $this->routes[$requestType]['404'])
-            );
-        }
-    }
+		$routeMatcher = $routeContainer->getMatcher();
 
-    /**
-     * Load and call the relevant controller action.
-     * @param $controller
-     * @param $action
-     * @return mixed
-     * @throws Exception
-     */
-    protected function callAction($controller, $action)
-    {
-        $controller = new $controller();
+		$request = Zend\Diactoros\ServerRequestFactory::fromGlobals(
+			$_SERVER,
+			$_GET,
+			$_POST,
+			$_COOKIE,
+			$_FILES
+		);
 
-        if (!method_exists($controller, $action)) {
-            throw new Exception(
-                "{$controller} does not respond to the {$action} action."
-            );
-        }
-        return $controller->$action();
-    }
+		$matched = $routeMatcher->match($request);
+
+		if (!$matched) {
+			throw new \Aura\Router\Exception("Route does not exists");
+		}
+
+		foreach ($matched->attributes as $key => $val) {
+			$request = $request->withAttribute($key, $val);
+		}
+
+
+		// /**
+		//  * This is totally optional. But you could use some "Control Inverting", than have `new` wrap all lines of your code
+		// *`SomeContainer` implement `Interop\Container\ContainerInterface`.;
+		// * A neat way to do this is to extend your choosen container and have the `get` method exposed by the interface retrieve the service from the container.
+		// * @see https://github.com/slimphp/slim/
+		// */
+		// $container = new SomeContainer();
+
+		// //Add an ORM, Doctrine in this case.
+		// $container['db'] = function ($container) {
+
+		//     $paths = array("/src/Entities");
+
+		//     $isDevMode = false;
+
+		//     $dbParams = [
+		//         'driver' => 'pdo_mysql',
+		//         'user' => 'root',
+		//         'password' => 'xx-xxx-xx-xx',
+		//         'dbname' => 'foo',
+		//     ];
+
+		//     $config = \Doctrine\ORM\Tools\Setup::createAnnotationMetadataConfiguration($paths, $isDevMode);
+
+		//     return \Doctrine\ORM\EntityManager::create($dbParams, $config);
+		// };
+
+		//You def' need a logger
+		// $container['logger'] = function ($container) {
+
+		//     $logger = new \Monolog\Logger("Your App Name");
+
+		//     $handler = new \Monolog\Handler\SyslogHandler('Owambe');
+		//     $handler->setFormatter(new \Monolog\Formatter\LineFormatter());
+
+		//     $logger->pushHandler($handler);
+
+		//     return $logger;
+		// };
+
+		// //register X,Y,Z services
+
+		// try {
+
+		//     $cfar = new \Adelowo\Cfar\Cfar($matched , $container);
+
+		//     $cfar->dispatch();
+
+		// } catch (\Adelowo\Cfar\CfarException $exception) {
+		//     echo $exception->getMessage();
+		// }
+
+	}
 }

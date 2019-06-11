@@ -5,12 +5,12 @@
 	<div class="header--carousel__wrapper">
 		<div class="container-fluid header--content__wrapper">
 			<div class="header--content">
-				<h1 class="header--title"><?= config('app.name') ?></h1>
+				<h1 class="header--title">Contact</h1>
 			</div>
 		</div>
 	</div>
 </header>
 <div>
-	<a href="/contact" class="btn btn-primary">Contact</a>
+	<a href="/" class="btn btn-primary">Home</a>
 </div>
 <!-- end::Header -->
