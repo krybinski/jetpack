@@ -1,26 +1,7 @@
 <?php
 
-// $map->get('home', '/')->handler('\Jetpack\Controllers\HomeController@index');
-
-$map->get('home', '/', function ($request) {
-    $response = new Zend\Diactoros\Response();
-    $response->getBody()->write("Home page");
-    return $response;
-});
-
-// $map->get('blog.read', '/blog/{id}', function ($request) {
-//     $id = (int) $request->getAttribute('id');
-//     $response = new Zend\Diactoros\Response();
-//     $response->getBody()->write("You asked for blog entry {$id}.");
-//     return $response;
-// });
-
-// $map->get('home', '/', function ($request, $response) {
-// 	var_dump('asd');
-// });
-
-// $router->get('', 'HomeController@index');
-// $router->get('contact', 'HomeController@contact');
+$router->get('/', 'HomeController@index');
+$router->get('/contact', 'HomeController@contact');
 
 // $router->get('login', 'LoginController@get');
 // $router->post('login', 'LoginController@post');

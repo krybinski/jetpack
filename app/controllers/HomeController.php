@@ -3,25 +3,21 @@
 namespace Jetpack\Controllers;
 
 use Jetpack\Traits\SeoTrait;
-use Zend\Diactoros\Response;
 
 class HomeController extends Controller
 {
 	use SeoTrait;
 
-    public function index()
+	public function index()
     {
-		var_dump('home');
 		$this->pageTitle('Home page');
 		$this->pageDescription('Home page description');
 		$this->seoTags = [
 			'canonical' => config('app.url'),
 		];
 
+		// TODO: here should be return statement
 		$this->view('index');
-		// $response = new Response();
-		// $response->getBody()->write("Home page");
-		// return $response;
     }
 
     public function contact()
@@ -32,6 +28,7 @@ class HomeController extends Controller
 			'canonical' => config('app.url') . '/contact',
 		];
 
+		// TODO: here should be return statement
         $this->view('contact');
     }
 }
