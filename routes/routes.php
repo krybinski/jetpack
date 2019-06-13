@@ -1,7 +1,7 @@
 <?php
 
-$router->get('/', 'HomeController@index');
-$router->get('/contact', 'HomeController@contact');
+$router->get('/', 'HomeController@index')->name('home');
+$router->get('/contact', 'HomeController@contact')->name('contact');
 
 // $router->get('login', 'LoginController@get');
 // $router->post('login', 'LoginController@post');
@@ -19,5 +19,3 @@ $router->get('/contact', 'HomeController@contact');
 // $router->post('create-password', 'CreatePasswordController@post');
 
 // $router->get('logout', 'LogoutController@get');
-
-// $router->get('404', 'ExceptionNotFoundController@get');

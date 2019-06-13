@@ -1,16 +1,17 @@
 <?php include __DIR__ . '/partials/header.php'; ?>
 
-<!-- begin::Header -->
-<header class="header">
-	<div class="header--carousel__wrapper">
-		<div class="container-fluid header--content__wrapper">
-			<div class="header--content">
-				<h1 class="header--title">Contact</h1>
-			</div>
+<?php include __DIR__ . '/components/navigation.view.php'; ?>
+
+<div class="container">
+	<!-- begin::Header -->
+	<header class="header mt-2">
+		<div class="jumbotron">
+			<h1 class="display-4">Contact</h1>
+			<p class="lead">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut illo facere perspiciatis similique reprehenderit hic repellendus. Tempore adipisci vel corporis.</p>
+			<p class="lead">
+				<a class="btn btn-primary btn-lg" href="<?= url('home') ?>" role="button">Show home page</a>
+			</p>
 		</div>
-	</div>
-</header>
-<div>
-	<a href="/" class="btn btn-primary">Home</a>
+	</header>
+	<!-- end::Header -->
 </div>
-<!-- end::Header -->

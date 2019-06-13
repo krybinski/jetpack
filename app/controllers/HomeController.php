@@ -10,11 +10,9 @@ class HomeController extends Controller
 
 	public function index()
     {
-		$this->pageTitle('Home page');
+		$this->pageTitle('Home');
 		$this->pageDescription('Home page description');
-		$this->seoTags = [
-			'canonical' => config('app.url'),
-		];
+		$this->canonical();
 
 		// TODO: here should be return statement
 		$this->view('index');
@@ -24,11 +22,9 @@ class HomeController extends Controller
     {
 		$this->pageTitle('Contact page');
 		$this->pageDescription('Contact page description');
-		$this->seoTags = [
-			'canonical' => config('app.url') . '/contact',
-		];
+		$this->canonical('/contact');
 
 		// TODO: here should be return statement
         $this->view('contact');
-    }
+	}
 }

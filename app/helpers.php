@@ -69,7 +69,12 @@ function getMethod()
  * @param $path
  * @return string
  */
-function route($path) {
-    $protocol = getProtocol();
-    return $protocol . "://$_SERVER[HTTP_HOST]/$path";
+function route($url) {
+	if (substr($url, -1) === '/') {
+		return substr($url, 0, -1);
+	}
+
+	return $url;
 }
+
+require_once '../vendor/pecee/simple-router/helpers.php';

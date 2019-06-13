@@ -9,7 +9,7 @@
     <meta name="description" content="<?= $this->pageDescription; ?>" />
     <meta name="robots" content="noindex, nofollow" />
     <!-- Styles -->
-    <link rel="stylesheet" href="/admin/vendors/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/vendors/css/bootstrap.min.css">
 	<!-- Favicon -->
 	<link rel="shortcut icon" href="/favicon.ico">
     <style>
