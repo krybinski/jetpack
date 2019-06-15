@@ -1,9 +1,99 @@
 <?php
 
+use Pecee\SimpleRouter\SimpleRouter as Router;
+use Pecee\Http\Url;
+use Pecee\Http\Response;
+use Pecee\Http\Request;
+
 /**
- * Get variable from configs
+ * Get url for a route by using either name/alias, class or method name.
+ *
+ * The name parameter supports the following values:
+ * - Route name
+ * - Controller/resource name (with or without method)
+ * - Controller class name
+ *
+ * When searching for controller/resource by name, you can use this syntax "route.name@method".
+ * You can also use the same syntax when searching for a specific controller-class "MyController@home".
+ * If no arguments is specified, it will return the url for the current loaded route.
+ *
+ * @param string|null $name
+ * @param string|array|null $parameters
+ * @param array|null $getParams
+ * @return \Pecee\Http\Url
+ * @throws \InvalidArgumentException
  */
-function config(string $path)
+function url(?string $name = null, $parameters = null, ?array $getParams = null): Url
+{
+    return Router::getUrl($name, $parameters, $getParams);
+}
+
+/**
+ * @return \Pecee\Http\Response
+ */
+function response(): Response
+{
+    return Router::response();
+}
+
+/**
+ * @return \Pecee\Http\Request
+ */
+function request(): Request
+{
+    return Router::request();
+}
+
+/**
+ * Get input class
+ * @param string|null $index Parameter index name
+ * @param string|null $defaultValue Default return value
+ * @param array ...$methods Default methods
+ * @return \Pecee\Http\Input\InputHandler|\Pecee\Http\Input\IInputItem|string
+ */
+function input($index = null, $defaultValue = null, ...$methods)
+{
+    if ($index !== null) {
+        return request()->getInputHandler()->getValue($index, $defaultValue, ...$methods);
+    }
+
+    return request()->getInputHandler();
+}
+
+/**
+ * @param string $url
+ * @param int|null $code
+ */
+function redirect(string $url, ?int $code = null): void
+{
+    if ($code !== null) {
+        response()->httpCode($code);
+    }
+
+    response()->redirect($url);
+}
+
+/**
+ * Get current csrf-token
+ * @return string|null
+ */
+function csrf_token(): ?string
+{
+    $baseVerifier = Router::router()->getCsrfVerifier();
+    if ($baseVerifier !== null) {
+        return $baseVerifier->getTokenProvider()->getToken();
+    }
+
+    return null;
+}
+
+/**
+ * Get config file
+ *
+ * @param string $path
+ * @return string|null
+ */
+function config(string $path): ?string
 {
 	$filename = explode('.', $path)[0];
 	$variable = explode('.', $path)[1];
@@ -12,69 +102,13 @@ function config(string $path)
 }
 
 /**
- * Get filtered $_POST values.
- * @return array
+ * Require view file
+ *
+ * @param string $view
+ * @return void
  */
-function filter_post()
+function view(string $view)
 {
-    $post = filter_input_array(INPUT_POST);
-    $post = array_map('trim', $post);
-    $post = array_map ('htmlspecialchars', $post);
-    return $post;
+	$view = strtolower($view);
+	require_once '../views/' . $view . '.view.php';
 }
-
-/**
- * Get filtered $_GET values.
- * @return array
- */
-function filter_get()
-{
-    $get = filter_input_array(INPUT_GET);
-    $get = array_map('trim', $get);
-    $get = array_map ('htmlspecialchars', $get);
-    return $get;
-}
-
-/**
- * Get protocol.
- * @return string
- */
-function getProtocol()
-{
-    return isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
-}
-
-/**
- * Get URI path.
- * @return string
- */
-function getUri()
-{
-    $uri = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
-    return $uri;
-}
-
-/**
- * Get request method.
- * @return string
- */
-function getMethod()
-{
-    $method = $_SERVER['REQUEST_METHOD'];
-    return $method;
-}
-
-/**
- * Generate route path
- * @param $path
- * @return string
- */
-function route($url) {
-	if (substr($url, -1) === '/') {
-		return substr($url, 0, -1);
-	}
-
-	return $url;
-}
-
-require_once '../vendor/pecee/simple-router/helpers.php';

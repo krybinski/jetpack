@@ -1,6 +1,6 @@
 <?php
 
-$dotenv = Dotenv\Dotenv::create('../');
+$dotenv = \Dotenv\Dotenv::create('../');
 $dotenv->load();
 
 return [

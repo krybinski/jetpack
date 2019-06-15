@@ -1,16 +1,30 @@
 <?php
+/**
+ * Custom router which handles default middlewares, default exceptions and things
+ * that should be happen before and after the router is initialised.
+ */
+namespace Jetpack;
 
 use Pecee\SimpleRouter\SimpleRouter;
 
-class Router
+class Router extends SimpleRouter
 {
-    public static function load($file)
-    {
-		$router = new SimpleRouter();
-		$router->setDefaultNamespace('\Jetpack\Controllers');
+    /**
+     * @throws \Exception
+     * @throws \Pecee\Http\Middleware\Exceptions\TokenMismatchException
+     * @throws \Pecee\SimpleRouter\Exceptions\HttpException
+     * @throws \Pecee\SimpleRouter\Exceptions\NotFoundHttpException
+     */
+    public static function start(): void
+	{
+		// Load our helpers
+		require_once 'helpers.php';
 
-		require_once $file;
+		// Load our custom routes
+		require_once '../routes/web.php';
 
-		$router->start();
+		// Do initial stuff
+		parent::start();
 	}
+
 }

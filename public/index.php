@@ -1,7 +1,7 @@
 <?php
 
-$root = __DIR__ . '/..';
+// load composer dependencies
+require '../vendor/autoload.php';
 
-require $root . '/vendor/autoload.php';
-
-Router::load($root . '/routes/routes.php');
+// Start the routing
+\Jetpack\Router::start();
