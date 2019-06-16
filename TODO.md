@@ -2,7 +2,6 @@
 
 - Active nav link function
 - Handle Request to routes
-- Add custom function to views
 - Versioning assets and inject to html
 - Translations
 

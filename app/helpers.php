@@ -88,20 +88,6 @@ function csrf_token(): ?string
 }
 
 /**
- * Get config file
- *
- * @param string $path
- * @return string|null
- */
-function config(string $path): ?string
-{
-	$filename = explode('.', $path)[0];
-	$variable = explode('.', $path)[1];
-	$load = include(dirname(__DIR__, 1) . '/config/' . $filename . '.php');
-	return $load[$variable];
-}
-
-/**
  * Render view file
  *
  * @param string $view
@@ -113,6 +99,27 @@ function view(string $view, array $variables = [])
 	$loader = new Twig_Loader_Filesystem(dirname(__DIR__, 1) . '/views');
 	// Instantiate our Twig
 	$twig = new Twig_Environment($loader);
+	// Append custom functions to view
+	appendTwigCustomFunctions($twig);
 
 	echo $twig->render($view . '.html.twig', $variables);
+}
+
+/**
+ * Append custom functions to twig templating
+ */
+function appendTwigCustomFunctions($twig): void
+{
+	$fnConfig = new \Twig_SimpleFunction('config', function (string $path) {
+		$filename = explode('.', $path)[0];
+		$variable = explode('.', $path)[1];
+		$load = include(dirname(__DIR__, 1) . '/config/' . $filename . '.php');
+		return $load[$variable];
+	});
+
+	$functions = array($fnConfig);
+
+	foreach ($functions as $fn) {
+		$twig->addFunction($fn);
+	}
 }

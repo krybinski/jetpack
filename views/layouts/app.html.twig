@@ -16,7 +16,7 @@
 	<link rel="shortcut icon" href="/favicon.ico">
 	<!-- Styles -->
     <link rel="stylesheet" href="/vendors/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/build/css/main.css?v=1.0.0" />
+    <link rel="stylesheet" href="/build/css/main.css" />
 
 	{% block stylesheets %}{% endblock %}
 </head>
@@ -38,7 +38,7 @@
         src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-    <script src="/build/js/main.js?v=<?= config('app.version') ?>"></script>
+    <script src="/build/js/main.js"></script>
 	{% block javascripts %}{% endblock %}
 </body>
 </html>
