@@ -1,10 +1,10 @@
 #TODO
 
 - Active nav link function
-- Remove constants file
 - Handle Request to routes
-- Twig templating
-- Remove route function
+- Add custom function to views
+- Versioning assets and inject to html
+- Translations
 
 - Admin dashboard
 - Login users
@@ -13,9 +13,5 @@
 - Forget password
 - Change password
 - Edit user profile
-
-- Manage other users
+- Manage users
 - Simple roles
-
-- Versioning assets and inject to html
-- Translations

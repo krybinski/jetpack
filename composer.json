@@ -9,7 +9,8 @@
 	"require": {
 		"php": ">=7.1",
 		"pecee/simple-router": "^4.2",
- 	 	"vlucas/phpdotenv": "^3.3"
+ 	 	"vlucas/phpdotenv": "^3.3",
+ 	 	"twig/twig": "^2.11"
 	},
 	"require-dev": {},
 	"config": {

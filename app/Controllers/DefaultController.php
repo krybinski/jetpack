@@ -6,21 +6,11 @@ class DefaultController
 {
 	public function home()
 	{
-		view('index');
+		return view('index');
 	}
 
 	public function contact()
 	{
-        return 'DefaultController -> contact';
+		return view('contact');
 	}
-
-	public function companies($id = null)
-	{
-        return 'DefaultController -> companies -> id: ' . $id;
-	}
-
-    public function notFound()
-    {
-        return 'Page not found';
-    }
 }

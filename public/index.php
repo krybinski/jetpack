@@ -1,6 +1,6 @@
 <?php
 
-// load composer dependencies
+// Load composer dependencies
 require '../vendor/autoload.php';
 
 // Start the routing

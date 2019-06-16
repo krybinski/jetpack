@@ -97,18 +97,22 @@ function config(string $path): ?string
 {
 	$filename = explode('.', $path)[0];
 	$variable = explode('.', $path)[1];
-	$load = include('../config/' . $filename . '.php');
+	$load = include(dirname(__DIR__, 1) . '/config/' . $filename . '.php');
 	return $load[$variable];
 }
 
 /**
- * Require view file
+ * Render view file
  *
  * @param string $view
  * @return void
  */
-function view(string $view)
+function view(string $view, array $variables = [])
 {
-	$view = strtolower($view);
-	require_once '../views/' . $view . '.view.php';
+	// Specify our Twig templates location
+	$loader = new Twig_Loader_Filesystem(dirname(__DIR__, 1) . '/views');
+	// Instantiate our Twig
+	$twig = new Twig_Environment($loader);
+
+	echo $twig->render($view . '.html.twig', $variables);
 }
